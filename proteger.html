@@ -5,169 +5,220 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Évaluation SST - Protéger</title>
     <style>
-        /* Police et couleurs INRS */
+        /* Réinitialisation et base */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
         body {
             font-family: "Arial Narrow", Arial, sans-serif;
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 20px;
             background-color: #FFFFFF;
             color: #000000;
+            max-width: 100%;
+            padding: 15px;
+            overflow-x: hidden;
+        }
+
+        h1 {
+            color: #F4912D;
+            font-size: 22px;
+            margin-bottom: 15px;
             text-align: center;
         }
-        
-        h1 {
-            color:#019E53;
-            margin-bottom: 30px;
-            font-size: 28px;
-        }
-        
+
         h2 {
             color: #019E53;
-            margin-bottom: 20px;
-            font-size: 22px;
+            font-size: 20px;
+            margin-bottom: 10px;
         }
-        
+
         .container {
             background-color: #FFFFFF;
             border: 1px solid #019E53;
             border-radius: 5px;
-            padding: 20px;
-            margin-bottom: 20px;
+            padding: 15px;
+            margin-bottom: 15px;
+            max-width: 100%;
         }
-        
+
         #participants-input {
             width: 100%;
-            height: 100px;
-            margin-bottom: 15px;
-            padding: 3px;
-            border: 1px solid #F4912D;
-            border-radius: 4px;
+            height: 80px;
+            margin-bottom: 10px;
+            padding: 8px;
+            border: 1px solid #019E53;
+            border-radius: 5px;
             font-size: 16px;
-            font-family: "Arial Narrow", Arial, sans-serif;
         }
-        
+
+        .buttons-container {
+            display: flex;
+            justify-content: flex-start;
+            gap: 10px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+
         button {
             background-color: #F4912D;
             color: #FFFFFF;
             border: none;
-            padding: 12px 24px;
+            padding: 10px 20px;
             font-size: 16px;
-            font-family: "Arial Narrow", Arial, sans-serif;
             border-radius: 5px;
             cursor: pointer;
-            margin: 10px;
             transition: background-color 0.3s;
+            white-space: nowrap;
         }
-        
+
         button:hover {
-            background-color: #e07a1f;
+            opacity: 0.9;
         }
-        
-        button:disabled {
-            background-color: #cccccc;
-            cursor: not-allowed;
-        }
-        
+
         #draw-button {
+            background-color: #F4912D;
+        }
+
+        #recommencer-button {
             background-color: #019E53;
-            font-size: 18px;
-            padding: 15px 30px;
         }
-        
-        #draw-button:hover {
-            background-color: #017a40;
-        }
-        
+
         #result-container {
             display: none;
-            margin-top: 20px;
+            margin-top: 15px;
             text-align: center;
-            border: 1px solid #F4912D;
-            padding: 20px;
+            border: 1px solid #019E53;
+            padding: 15px;
             border-radius: 5px;
-        }
-        
-        #image-display {
             max-width: 100%;
-            max-height: 400px;
-            border: 1px solid #F4912D;
-            border-radius: 5px;
-            margin: 20px auto;
-            display: block;
         }
-        
+
+        /* Réduction de la taille de l'image */
+        #image-display {
+            max-width: 80%; /* Réduit à 80% de la largeur du conteneur */
+            max-height: 300px; /* Limite la hauteur */
+            height: auto;
+            border: 1px solid #019E53;
+            border-radius: 5px;
+            margin: 15px auto;
+            display: block;
+            object-fit: contain;
+        }
+
         #description {
-            font-size: 18px;
-            margin: 20px 0;
+            font-size: 20px;
+            margin: 15px 0;
             color: #000000;
             line-height: 1.5;
-            text-align: left;
+            text-align: center;
         }
-        
+
         #stagiaire {
             font-size: 20px;
             font-weight: bold;
-            color: #F4912D;
-            margin: 20px 0;
+            color: #019E53;
+            margin: 15px 0;
         }
-        
+
         .question {
-            font-size: 18px;
+            font-size: 20px;
             font-weight: bold;
-            margin: 25px 0 15px 0;
+            margin: 20px 0 15px 0;
             color: #000000;
-            text-align: left;
+            text-align: center;
         }
-        
+
         .danger-options {
             display: flex;
             justify-content: center;
-            gap: 15px;
-            margin: 20px 0;
+            gap: 10px;
+            margin: 15px 0;
             flex-wrap: wrap;
         }
-        
+
         .danger-option {
             background-color: #FFFFFF;
             color: #000000;
-            padding: 10px 15px;
+            padding: 8px 12px;
             border: 1px solid #F4912D;
             border-radius: 5px;
             cursor: pointer;
             transition: all 0.3s;
-            font-family: "Arial Narrow", Arial, sans-serif;
+            font-size: 20px;
         }
-        
+
         .danger-option:hover {
-            background-color: #019E53;
+            background-color: #F4912D;
             color: #FFFFFF;
         }
-        
+
         .danger-option.selected {
             background-color: #019E53;
             color: #FFFFFF;
             border-color: #019E53;
         }
-        
+
         #sur-accident-question {
-            margin-top: 30px;
-            padding: 15px;
+            margin-top: 20px;
+            padding: 10px;
             background-color: #FFF;
             border: 1px solid #F4912D;
             border-radius: 5px;
-            text-align: left;
+            text-align: center;
+            font-size: 20px;
         }
-        
+
         #error-message {
             color: #F4912D;
             font-weight: bold;
             margin-top: 10px;
             display: none;
+            font-size: 20px;
         }
-        
+
         .hidden {
             display: none;
+        }
+
+        /* Responsive pour les petits écrans */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+
+            h1 {
+                font-size: 20px;
+            }
+
+            h2 {
+                font-size: 16px;
+            }
+
+            #image-display {
+                max-width: 95%; /* Prend presque toute la largeur sur mobile */
+                max-height: 250px;
+            }
+
+            .danger-options {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .danger-option {
+                width: 80%;
+                margin-bottom: 8px;
+            }
+
+            .buttons-container {
+                justify-content: center;
+            }
+
+            button {
+                width: 100%;
+                margin: 5px 0;
+            }
         }
     </style>
 </head>
@@ -180,34 +231,40 @@
         <p>Séparez les prénoms par des virgules ou un retour à la ligne :</p>
         <textarea id="participants-input" placeholder="Ex: Jean, Marie, Pierre..."></textarea>
         <div id="error-message"></div>
-        <button onclick="validerParticipants()">Valider la liste</button>
+        <div class="buttons-container">
+            <button onclick="validerParticipants()">Valider la liste</button>
+        </div>
     </div>
 
     <!-- Étape 2 : Tirage au sort -->
     <div id="draw-section" class="container hidden">
-        <button id="draw-button" onclick="tirerAuSort()">Tirer au sort</button>
-        
+        <div class="buttons-container">
+            <button id="draw-button" onclick="tirerAuSort()">Tirer au sort</button>
+        </div>
+
         <!-- Résultat du tirage -->
         <div id="result-container">
             <div id="stagiaire"></div>
             <img id="image-display" src="" alt="Image de la situation">
             <p id="description"></p>
-            
+
             <div class="question">
                 De quel type de danger s’agit-il ?
             </div>
             <div class="danger-options" id="danger-options">
                 <div class="danger-option" onclick="selectDangerType(this, 'mécanique')">Mécanique</div>
                 <div class="danger-option" onclick="selectDangerType(this, 'thermique')">Thermique</div>
-                <div class="danger-option" onclick="selectDangerType(this, 'atmosphérique')">Atmosphérique</div>
+                <div class="danger-option" onclick="selectDangerType(this, 'atmosphérique')">Atmosphérique / toxique</div>
                 <div class="danger-option" onclick="selectDangerType(this, 'électrique')">Électrique</div>
             </div>
-            
+
             <div class="question" id="sur-accident-question">
                 Qu’allez-vous faire pour éviter un sur-accident ?
             </div>
-            
-            <button onclick="recommencer()" style="background-color: #F4912D;">Recommencer</button>
+
+            <div class="buttons-container">
+                <button id="recommencer-button" onclick="recommencer()">Recommencer</button>
+            </div>
         </div>
     </div>
 
@@ -217,7 +274,8 @@
         let evaluationData = {};
         let currentImage = null;
         let currentStagiaire = null;
-        let usedCombinations = []; // Pour éviter les répétitions
+        let usedCombinations = [];
+        let usedImages = [];
 
         // Charger le fichier JSON
         async function chargerEvaluationData() {
@@ -227,83 +285,78 @@
                     throw new Error("Fichier JSON introuvable. Vérifiez que 'evaluation_PROTEGER.json' est dans le même dossier.");
                 }
                 evaluationData = await response.json();
+
+                if (evaluationData.evaluation_PROTEGER && evaluationData.evaluation_PROTEGER.images) {
+                    evaluationData.evaluation_PROTEGER.images.forEach(image => {
+                        if (!image.path.startsWith('images/')) {
+                            image.path = 'images/' + image.path;
+                        }
+                    });
+                }
             } catch (error) {
                 alert("Erreur lors du chargement du fichier JSON : " + error.message);
                 console.error(error);
             }
         }
 
-        // Valider la liste des participants
         function validerParticipants() {
             const input = document.getElementById('participants-input').value.trim();
             const errorMessage = document.getElementById('error-message');
-            
+
             if (!input) {
                 errorMessage.textContent = "Veuillez saisir au moins un prénom.";
                 errorMessage.style.display = 'block';
                 return;
             }
-            
-            // Séparer les prénoms par virgules ou retours à la ligne
+
             participants = input.split(/[,\n]/)
                 .map(name => name.trim())
                 .filter(name => name.length > 0);
-            
+
             if (participants.length === 0 || participants.length > 10) {
                 errorMessage.textContent = "Veuillez saisir entre 1 et 10 prénoms.";
                 errorMessage.style.display = 'block';
                 return;
             }
-            
+
             errorMessage.style.display = 'none';
             document.getElementById('participants-section').classList.add('hidden');
             document.getElementById('draw-section').classList.remove('hidden');
-            
-            // Charger les données du JSON
             chargerEvaluationData();
         }
 
-        // Tirer au sort une image et un stagiaire
         function tirerAuSort() {
             if (participants.length === 0 || !evaluationData.evaluation_PROTEGER || evaluationData.evaluation_PROTEGER.images.length === 0) {
                 alert("Aucune donnée disponible pour le tirage au sort.");
                 return;
             }
 
-            // Vérifier si toutes les combinaisons ont été utilisées
-            const totalCombinations = participants.length * evaluationData.evaluation_PROTEGER.images.length;
-            if (usedCombinations.length >= totalCombinations) {
-                alert("Toutes les combinaisons possibles ont été tirées au sort. Réinitialisez pour recommencer.");
+            if (usedImages.length >= evaluationData.evaluation_PROTEGER.images.length) {
+                alert("Toutes les images ont été utilisées. Réinitialisez pour recommencer.");
                 return;
             }
 
-            // Tirer au sort une combinaison unique
-            let newCombination;
+            let randomImageIndex;
             do {
-                const randomStagiaireIndex = Math.floor(Math.random() * participants.length);
-                const randomImageIndex = Math.floor(Math.random() * evaluationData.evaluation_PROTEGER.images.length);
-                newCombination = `${randomStagiaireIndex}-${randomImageIndex}`;
-            } while (usedCombinations.includes(newCombination));
+                randomImageIndex = Math.floor(Math.random() * evaluationData.evaluation_PROTEGER.images.length);
+            } while (usedImages.includes(randomImageIndex));
 
-            usedCombinations.push(newCombination);
-            
-            const [stagiaireIndex, imageIndex] = newCombination.split('-').map(Number);
-            currentStagiaire = participants[stagiaireIndex];
-            currentImage = evaluationData.evaluation_PROTEGER.images[imageIndex];
+            const randomStagiaireIndex = Math.floor(Math.random() * participants.length);
 
-            // Afficher le résultat
+            usedImages.push(randomImageIndex);
+            currentStagiaire = participants[randomStagiaireIndex];
+            currentImage = evaluationData.evaluation_PROTEGER.images[randomImageIndex];
+
             document.getElementById('stagiaire').textContent = `Stagiaire : ${currentStagiaire}`;
             document.getElementById('image-display').src = currentImage.path;
             document.getElementById('description').textContent = currentImage.description;
             document.getElementById('result-container').style.display = 'block';
-            
-            // Réinitialiser la sélection du type de danger
+
             document.querySelectorAll('.danger-option').forEach(option => {
                 option.classList.remove('selected');
             });
         }
 
-        // Sélectionner un type de danger
         function selectDangerType(element, type) {
             document.querySelectorAll('.danger-option').forEach(option => {
                 option.classList.remove('selected');
@@ -311,14 +364,13 @@
             element.classList.add('selected');
         }
 
-        // Recommencer un tirage
         function recommencer() {
             document.getElementById('result-container').style.display = 'none';
+            usedCombinations = [];
+            usedImages = [];
         }
 
-        // Charger les données au démarrage de la page
         window.onload = function() {
-            // Masquer la section de tirage au démarrage
             document.getElementById('draw-section').classList.add('hidden');
         };
     </script>

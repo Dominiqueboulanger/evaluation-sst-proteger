@@ -29,7 +29,7 @@
         "id": 5,
         "path": "images/Votre_employeure_est_a_terre.jpg",
         "description": "Vous avez entendu un bruit sourd dans la cuisine.",
-        "danger_type": ["atmosphérique"]
+        "danger_type": ["atmosphérique/toxique"]
       },
       {
         "id": 6,
@@ -40,14 +40,14 @@
       {
         "id": 7,
         "path": "images/Mustapha_saigne_du_nez.jpg",
-        "description": "Vous arrivez à votre travail, Mustapha pleure, il a très mal au nez et le chien grogne.",
+        "description": "Vous arrivez à votre travail, Mustapha pleure, il saigne légèrement du nez, le chien grogne et montre les dents.",
         "danger_type": ["mécanique"]
       },
       {
         "id": 8,
         "path": "images/Vlodimir_BBQ_gaz_dans_le_jardin.jpg",
         "description": "Volodimir, avec son grand cousin (19 ans), pousse un grand cri dans le jardin !",
-        "danger_type": ["thermique", "atmosphérique"]
+        "danger_type": ["thermique"]
       },
       {
         "id": 9,

@@ -1,0 +1,66 @@
+{
+  "evaluation_PROTEGER": {
+    "images": [
+      {
+        "id": 1,
+        "path": "images/empoisonnement_au_muguet.jpg",
+        "description": "Imelda vient de proposer à son petit frère de manger du muguet pour voir quel goût il a !",
+        "danger_type": ["mécanique"]
+      },
+      {
+        "id": 2,
+        "path": "images/Mme_CHILI_s_est_coupee.jpg",
+        "description": "Mme Chili est dans sa cuisine, le sang coule !",
+        "danger_type": ["mécanique"]
+      },
+      {
+        "id": 3,
+        "path": "images/Driss_panique_dans_son_bain.jpg",
+        "description": "Driss vient de boire la tasse dans une eau à 30 degrés.",
+        "danger_type": ["thermique"]
+      },
+      {
+        "id": 4,
+        "path": "images/Jayson_electrocution.jpg",
+        "description": "Jayson vient de planter une fourchette dans la prise !",
+        "danger_type": ["électrique"]
+      },
+      {
+        "id": 5,
+        "path": "images/Votre_employeure_est_a_terre.jpg",
+        "description": "Vous avez entendu un bruit sourd dans la cuisine.",
+        "danger_type": ["atmosphérique"]
+      },
+      {
+        "id": 6,
+        "path": "images/Monsieur_Pierre_ne_repond_pas.jpg",
+        "description": "M. Pierre vous a demandé de faire une course pour lui, à votre retour il est inconscient.",
+        "danger_type": ["thermique"]
+      },
+      {
+        "id": 7,
+        "path": "images/Mustapha_saigne_du_nez.jpg",
+        "description": "Vous arrivez à votre travail, Mustapha pleure, il a très mal au nez et le chien grogne.",
+        "danger_type": ["mécanique"]
+      },
+      {
+        "id": 8,
+        "path": "images/Vlodimir_BBQ_gaz_dans_le_jardin.jpg",
+        "description": "Volodimir, avec son grand cousin (19 ans), pousse un grand cri dans le jardin !",
+        "danger_type": ["thermique", "atmosphérique"]
+      },
+      {
+        "id": 9,
+        "path": "images/M_Robert_Chute_dans_sa_cuisine.jpg",
+        "description": "Vous êtes en train de laver les carreaux quand M. Robert vous appelle.",
+        "danger_type": ["mécanique"]
+      },
+      {
+        "id": 10,
+        "path": "images/Lloyd_glisse_et_chute_en_arriere.jpg",
+        "description": "Vous arrivez dans la chambre de Lloyd qui joue aux billes.",
+        "danger_type": ["mécanique"]
+      }
+    ]
+  }
+}
